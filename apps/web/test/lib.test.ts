@@ -37,6 +37,7 @@ const good: ProfileForm = {
   buffer_min: '10',
   slot_step_min: '30',
   min_notice_min: '60',
+  reminder_template: 'Hola {nombre}, mañana {hora}.',
 };
 
 describe('formulario de perfil', () => {
@@ -54,6 +55,9 @@ describe('formulario de perfil', () => {
     expect(validateProfileForm({ ...good, slot_step_min: '25' }).slot_step_min).toBeDefined();
     expect(validateProfileForm({ ...good, min_notice_min: '10081' }).min_notice_min).toBeDefined();
     expect(validateProfileForm({ ...good, display_name: 'x'.repeat(121) }).display_name).toBeDefined();
+    expect(validateProfileForm({ ...good, reminder_template: '   ' }).reminder_template).toBeDefined();
+    expect(validateProfileForm({ ...good, reminder_template: 'x'.repeat(501) }).reminder_template).toBeDefined();
+    expect(validateProfileForm({ ...good, reminder_template: 'x'.repeat(500) }).reminder_template).toBeUndefined();
   });
 });
 

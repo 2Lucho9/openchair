@@ -8,6 +8,7 @@ import type { Profile } from '../lib/profile';
 import { supabase } from '../lib/supabase';
 import { buildSchedule, buildTodayView } from '../lib/today';
 import { useQuery } from '../lib/useQuery';
+import { Reminders } from '../components/Reminders';
 import { AppointmentDetail } from './AppointmentDetail';
 import { NewAppointment } from './NewAppointment';
 
@@ -119,6 +120,8 @@ export function Agenda({ profile, mode }: { profile: Profile; mode: 'today' | 'a
           </div>
         </section>
       )}
+
+      {mode === 'today' && <Reminders profile={profile} onOpen={(id) => setFlow({ kind: 'detail', id })} />}
 
       {q.loading && <p className="muted">Cargando…</p>}
       {q.error && <p className="msg error">No se pudo cargar: {q.error}</p>}

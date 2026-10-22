@@ -3,6 +3,7 @@ import { ENGINE_VERSION } from '@openchair/engine';
 import { HoursEditor } from '../components/HoursEditor';
 import { TimeOffEditor } from '../components/TimeOffEditor';
 import { useAuth } from '../lib/auth';
+import { DEFAULT_TEMPLATE, TEMPLATE_VARS } from '../lib/reminders';
 import {
   SLOT_STEPS,
   profileToForm,
@@ -75,6 +76,15 @@ export function Settings(props: {
           </select>
         </label>
         {field('min_notice_min', 'Aviso mínimo para agendar (min)', { type: 'number', hint: '0 = se puede agendar de inmediato.' })}
+        <label>
+          Mensaje de recordatorio (WhatsApp)
+          <textarea rows={4} value={form.reminder_template} onChange={(e) => set('reminder_template')(e.target.value)} />
+          {errors.reminder_template && <small className="field-error">{errors.reminder_template}</small>}
+          <small className="muted">Variables: {TEMPLATE_VARS.join(' ')}</small>
+        </label>
+        <button type="button" className="link left" onClick={() => set('reminder_template')(DEFAULT_TEMPLATE)}>
+          Volver al mensaje original
+        </button>
         {msg && <p className={'msg ' + msg.kind}>{msg.text}</p>}
         <button type="submit" disabled={busy}>
           {busy ? 'Guardando…' : 'Guardar'}
