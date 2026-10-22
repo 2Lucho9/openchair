@@ -259,3 +259,6 @@ button.chip { cursor: pointer; min-height: 38px; }
 .dot.off { opacity: 0.4; }
 .status-completed { color: var(--accent); border-color: var(--accent); }
 .status-cancelled, .status-no_show { color: var(--danger); border-color: var(--danger); }
+
+/* --- Fase 6: recordatorios --- */
+button.plain { background: transparent; min-height: 0; padding: 0; color: inherit; font-weight: 400; }

@@ -4,7 +4,7 @@ import { formToUpdate } from './profile';
 import { supabase } from './supabase';
 
 const COLUMNS =
-  'id, display_name, business_name, phone, currency, tz_offset_min, buffer_min, slot_step_min, min_notice_min';
+  'id, display_name, business_name, phone, currency, tz_offset_min, buffer_min, slot_step_min, min_notice_min, reminder_template';
 
 export function useProfile(userId: string) {
   const [profile, setProfile] = useState<Profile | null>(null);

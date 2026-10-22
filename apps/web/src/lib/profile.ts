@@ -10,6 +10,7 @@ export interface Profile {
   buffer_min: number;
   slot_step_min: number;
   min_notice_min: number;
+  reminder_template: string;
 }
 
 export interface ProfileForm {
@@ -20,6 +21,7 @@ export interface ProfileForm {
   buffer_min: string;
   slot_step_min: string;
   min_notice_min: string;
+  reminder_template: string;
 }
 
 export type ProfileErrors = Partial<Record<keyof ProfileForm, string>>;
@@ -33,6 +35,7 @@ export function profileToForm(p: Profile): ProfileForm {
     buffer_min: String(p.buffer_min),
     slot_step_min: String(p.slot_step_min),
     min_notice_min: String(p.min_notice_min),
+    reminder_template: p.reminder_template,
   };
 }
 
@@ -51,6 +54,8 @@ export function validateProfileForm(f: ProfileForm): ProfileErrors {
     e.slot_step_min = 'Elige 5, 10, 15, 20, 30 o 60.';
   if (!isInt(f.min_notice_min) || Number(f.min_notice_min) > 10080)
     e.min_notice_min = 'Un número entre 0 y 10080 (una semana).';
+  const tpl = f.reminder_template.trim().length;
+  if (tpl < 1 || f.reminder_template.length > 500) e.reminder_template = 'Entre 1 y 500 caracteres.';
   return e;
 }
 
@@ -63,5 +68,6 @@ export function formToUpdate(f: ProfileForm) {
     buffer_min: Number(f.buffer_min),
     slot_step_min: Number(f.slot_step_min),
     min_notice_min: Number(f.min_notice_min),
+    reminder_template: f.reminder_template.trim(),
   };
 }
