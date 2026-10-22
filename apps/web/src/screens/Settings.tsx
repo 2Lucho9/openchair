@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { ENGINE_VERSION } from '@openchair/engine';
+import { HoursEditor } from '../components/HoursEditor';
+import { TimeOffEditor } from '../components/TimeOffEditor';
 import { useAuth } from '../lib/auth';
 import {
   SLOT_STEPS,
@@ -78,6 +80,8 @@ export function Settings(props: {
           {busy ? 'Guardando…' : 'Guardar'}
         </button>
       </form>
+      <HoursEditor />
+      <TimeOffEditor profile={props.profile} />
       <section className="card">
         <h2>Cuenta</h2>
         <p className="muted">{props.email}</p>

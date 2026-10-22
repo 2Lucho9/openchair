@@ -57,7 +57,7 @@ export function Today({ profile }: { profile: Profile }) {
       <section className="card">
         <h2>Citas de hoy</h2>
         {active.length === 0 ? (
-          <p className="muted">Hoy no tienes citas. Las pantallas para agendar llegan en la Fase 5.</p>
+          <p className="muted">Hoy no tienes citas. Agendar citas llega en la Fase 5B.</p>
         ) : (
           <ul className="list">
             {active.map((a) => (
@@ -71,7 +71,7 @@ export function Today({ profile }: { profile: Profile }) {
       <section className="card">
         <h2>Sillas libres hoy</h2>
         {!view.hasHours ? (
-          <p className="muted">Todavía no hay horario para hoy. Se configura en la Fase 5.</p>
+          <p className="muted">Todavía no hay horario para hoy. Se configura en Ajustes.</p>
         ) : view.freeStarts.length === 0 ? (
           <p className="muted">Sin sillas libres hoy.</p>
         ) : (
