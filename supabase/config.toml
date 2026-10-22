@@ -1,0 +1,5 @@
+# Configuracion minima del CLI de Supabase. El proyecto real se enlaza con: pnpm exec supabase link
+project_id = "openchair"
+
+[db]
+major_version = 17
