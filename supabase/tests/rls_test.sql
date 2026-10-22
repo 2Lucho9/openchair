@@ -1,4 +1,4 @@
--- OpenChair · Fase 2 · Prueba de seguridad y reglas de la base de datos
+-- OpenChair · Fase 2 (actualizada en Fase 3) · Prueba de seguridad y reglas de la base de datos
 --
 -- Cómo correrla: copia TODO este archivo, pégalo en Supabase → SQL Editor y ejecútalo.
 -- Crea dos usuarios de prueba (A y B) y verifica aislamiento, choques de citas y pagos.
@@ -107,7 +107,7 @@ do $$
 declare
   a uuid := '00000000-0000-4000-8000-00000000000a';
   b uuid := '00000000-0000-4000-8000-00000000000b';
-  base timestamptz := timestamptz '2026-11-02 15:00:00+00';  -- lunes 09:00 en Costa Rica
+  base timestamptz := timestamptz '2026-01-05 15:00:00+00';  -- lunes 09:00 en Costa Rica (pasado: en Fase 3 solo se completa lo que ya empezó)
   ca uuid; cb uuid; sa uuid; sb uuid;
   a1 uuid; a2 uuid; a3 uuid; a4 uuid; ab uuid;
   p1 uuid; p2 uuid; pb uuid;
@@ -242,7 +242,7 @@ begin
   perform tests.ok('una cita cancelada libera el horario', a4 is not null);
   -- ...pero no se puede reactivar encima de otra.
   perform tests.expect_fail('reactivar una cancelada sobre un horario ocupado: choque',
-    format('update public.appointments set status = %L where id = %L', 'confirmed', a2), '23P01');
+    format('update public.appointments set status = %L where id = %L', 'scheduled', a2), '23P01');
 
   -- "No asistió" también libera.
   perform tests.expect_affected('A marca no asistió la cita de las 09:30',
