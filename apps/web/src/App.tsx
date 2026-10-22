@@ -4,12 +4,11 @@ import { AuthProvider, useAuth } from './lib/auth';
 import { TABS, parseTab, type TabId } from './lib/nav';
 import { configError } from './lib/supabase';
 import { useProfile } from './lib/useProfile';
+import { Agenda } from './screens/Agenda';
 import { Clients } from './screens/Clients';
-import { Coming } from './screens/Coming';
 import { Login } from './screens/Login';
 import { Services } from './screens/Services';
 import { Settings } from './screens/Settings';
-import { Today } from './screens/Today';
 
 function useTab(): TabId {
   const [tab, setTab] = useState<TabId>(() => parseTab(window.location.hash));
@@ -37,8 +36,8 @@ function Private({ userId, email }: { userId: string; email: string }) {
         </button>
       </section>
     );
-  else if (tab === 'hoy') body = <Today profile={profile} />;
-  else if (tab === 'agenda') body = <Coming what="Agenda del día y la semana" phase="Fase 5B" />;
+  else if (tab === 'hoy') body = <Agenda profile={profile} mode="today" />;
+  else if (tab === 'agenda') body = <Agenda profile={profile} mode="agenda" />;
   else if (tab === 'clientes') body = <Clients profile={profile} />;
   else if (tab === 'servicios') body = <Services profile={profile} />;
   else body = <Settings profile={profile} email={email} onSave={save} />;

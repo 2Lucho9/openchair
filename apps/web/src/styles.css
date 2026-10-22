@@ -234,3 +234,28 @@ button.left { justify-self: start; padding-left: 0; }
 .add-shift { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 .add-shift select { grid-column: 1 / -1; }
 .add-shift button { grid-column: 1 / -1; }
+
+/* --- Fase 5B: agenda, citas, cobro --- */
+.item.picked { border-color: var(--accent); }
+.item .time { font-variant-numeric: tabular-nums; color: var(--accent); min-width: 3.2rem; }
+.card.inner { background: var(--bg); }
+.check { display: flex; align-items: center; gap: 8px; margin-top: 6px; color: var(--text); }
+.check input { min-height: 0; width: 20px; height: 20px; }
+.chip { background: transparent; font: inherit; min-height: 0; font-weight: 400; cursor: default; }
+button.chip { cursor: pointer; min-height: 38px; }
+.chip.selected { background: var(--accent); color: var(--accent-text); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.seg button { border-radius: 0; background: transparent; color: var(--muted); font-weight: 500; }
+.seg button.on { background: var(--accent); color: var(--accent-text); }
+.slotpicker { display: grid; gap: 10px; }
+.datenav { display: flex; gap: 6px; align-items: center; }
+.datenav input { flex: 1; min-width: 0; }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.daybtn { display: grid; justify-items: center; gap: 2px; min-height: 0; padding: 6px 0; background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 10px; font-weight: 400; }
+.daybtn.on { border-color: var(--accent); background: var(--accent); color: var(--accent-text); }
+.daybtn small { color: inherit; opacity: 0.75; }
+.dot { font-size: 0.7rem; min-width: 1.4em; text-align: center; border-radius: 999px; padding: 0 4px; background: var(--line); color: var(--text); }
+.daybtn.on .dot { background: rgba(0, 0, 0, 0.18); color: inherit; }
+.dot.off { opacity: 0.4; }
+.status-completed { color: var(--accent); border-color: var(--accent); }
+.status-cancelled, .status-no_show { color: var(--danger); border-color: var(--danger); }

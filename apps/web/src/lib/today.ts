@@ -25,6 +25,12 @@ export interface AppointmentRow {
   service_name: string;
 }
 
+/** Cita con los datos que usa la agenda. */
+export interface AgendaAppt extends AppointmentRow {
+  client_id: string;
+  price: number;
+}
+
 export function buildSchedule(rows: WorkingHoursRow[], tzOffsetMinutes: number): Schedule {
   const weekly: WeeklyHours = {};
   for (const r of rows) {
@@ -60,14 +66,18 @@ export interface TodayView {
 /** Sillas libres de hoy para un servicio de `durationMin`, según horario, citas y margen. */
 export function buildTodayView(opts: {
   now: number;
+  /** Fecha local AAAA-MM-DD. Por defecto, el día de `now`. */
+  date?: string;
   schedule: Schedule;
   appointments: AppointmentRow[];
+  timeOff?: Interval[];
+  excludeId?: string;
   durationMin: number;
   bufferMin: number;
   stepMin: number;
   minNoticeMin: number;
 }): TodayView {
-  const date = toLocalDate(opts.now, opts.schedule.tzOffsetMinutes);
+  const date = opts.date ?? toLocalDate(opts.now, opts.schedule.tzOffsetMinutes);
   const hasHours = (opts.schedule.weekly[dayOfWeek(date)] ?? []).length > 0;
   const freeStarts = hasHours
     ? freeSlots({
@@ -79,6 +89,8 @@ export function buildTodayView(opts: {
         now: opts.now,
         schedule: opts.schedule,
         appointments: toEngineAppointments(opts.appointments),
+        timeOff: opts.timeOff,
+        excludeId: opts.excludeId,
       })
     : [];
   return { date, hasHours, freeStarts };
